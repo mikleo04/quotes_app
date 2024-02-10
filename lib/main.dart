@@ -1,8 +1,7 @@
-import 'package:advance_navigation_2/model/quote.dart';
-import 'package:advance_navigation_2/router/router_delegate.dart';
-import 'package:advance_navigation_2/screen/quote_detail_screen.dart';
-import 'package:advance_navigation_2/screen/quote_list_screen.dart';
+import 'package:advance_navigation_2/routes/page_manager.dart';
+import 'package:advance_navigation_2/routes/router_delegate.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const QuotesApp());
@@ -26,11 +25,14 @@ class _QuotesAppState extends State<QuotesApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Quotes App',
-      home: Router(
-        routerDelegate: myRouterDelegate,
-        backButtonDispatcher: RootBackButtonDispatcher(),
+    return ChangeNotifierProvider(
+      create: (context) => PageManager(),
+      child: MaterialApp(
+        title: 'Quotes App',
+        home: Router(
+          routerDelegate: myRouterDelegate,
+          backButtonDispatcher: RootBackButtonDispatcher(),
+        ),
       ),
     );
   }
