@@ -1,11 +1,14 @@
+import 'package:advance_navigation_2/common/url_strategy.dart';
 import 'package:advance_navigation_2/db/auth_repository.dart';
 import 'package:advance_navigation_2/provider/auth_provider.dart';
 import 'package:advance_navigation_2/routes/page_manager.dart';
+import 'package:advance_navigation_2/routes/route_information_parser.dart';
 import 'package:advance_navigation_2/routes/router_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  usePathUrlStrategy();
   runApp(const QuotesApp());
 }
 
@@ -19,6 +22,7 @@ class QuotesApp extends StatefulWidget {
 class _QuotesAppState extends State<QuotesApp> {
   late MyRouterDelegate myRouterDelegate;
   late AuthProvider authProvider;
+  late MyRouteInformationParser myRouteInformationParser;
 
   @override
   void initState() {
@@ -28,6 +32,8 @@ class _QuotesAppState extends State<QuotesApp> {
     authProvider = AuthProvider(authRepository);
 
     myRouterDelegate = MyRouterDelegate(authRepository);
+
+    myRouteInformationParser = MyRouteInformationParser();
   }
 
   @override
@@ -37,12 +43,11 @@ class _QuotesAppState extends State<QuotesApp> {
         ChangeNotifierProvider<AuthProvider>.value(value: authProvider),
         ChangeNotifierProvider<PageManager>(create: (_) => PageManager()),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: 'Quotes App',
-        home: Router(
-          routerDelegate: myRouterDelegate,
-          backButtonDispatcher: RootBackButtonDispatcher(),
-        ),
+        routerDelegate: myRouterDelegate,
+        routeInformationParser: myRouteInformationParser,
+        backButtonDispatcher: RootBackButtonDispatcher(),
       ),
     );
   }
