@@ -32,8 +32,11 @@ class _QuotesAppState extends State<QuotesApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => authProvider,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AuthProvider>.value(value: authProvider),
+        ChangeNotifierProvider<PageManager>(create: (_) => PageManager()),
+      ],
       child: MaterialApp(
         title: 'Quotes App',
         home: Router(

@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     return null;
                   },
                   decoration: const InputDecoration(
-                    hintText: "EMail",
+                    hintText: "Email",
                   ),
                 ),
                 const SizedBox(height: 8,),
