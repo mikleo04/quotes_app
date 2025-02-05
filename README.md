@@ -10,9 +10,6 @@ A beautiful Flutter application that delivers inspiring and motivational quotes.
 - Easy navigation between screens
 - Clean and intuitive user interface
 
-## App Screenshots
-[Add your screenshots here]
-
 ## Technologies Used
 
 - Flutter
